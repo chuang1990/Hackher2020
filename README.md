@@ -1,7 +1,7 @@
 Project for HackHer413 2020
-<!-- 
-# Project Title
- -->
+
+# SoundClutch
+
 
 
 ## Getting Started
@@ -16,23 +16,15 @@ pydub
 urllib   
 pathlib
 
-### Installing
+### Running the project
 
-A step by step series of examples that tell you how to get a development env running
+Download and unzip the repository to your computer and Raspberry Pi.
 
-Say what the step will be
+Make sure the Bose SoundTouch, Raspberry Pi, and Computer are all on the same wifi networks. 
 
-```
-Give the example
-```
+On your computer, start by running the upn_server.py, then runs the spotifyPlayback.py.  On the Rapberry Pi run the ultrasonic_distance.py.
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+Then move towards the sensor, within a certain distance the audio will be paused, the notification sound will be play, then music will resume.
 
 ## Built With
 
@@ -42,10 +34,10 @@ Bose SoundTouch API](https://developer.bose.com/guides/bose-soundtouch-api) - Th
 ](https://www.raspberrypi.org/documentation/) - The hardware use to enable envinment sensing
 ## Authors
 
-* **Anita Yip** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Catherine Huang** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Emily Huang** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Kunjal Pantal** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Kunjal Panchal** - *Initial work* - [Astuary](https://github.com/Astuary)
+* **Catherine Huang** - *Initial work* - [chuang1990](https://github.com/chuang1990)
+* **Anita Yip** - *Initial work* - [aniyip](https://github.com/aniyip)
+* **Emily Huang** - *Initial work* - [Ehuang1412](https://github.com/Ehuang1412)
 
 ## License
 
@@ -54,5 +46,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* HackHer413 Organizers, Volunteers, Mentors, and fellow Attendees
