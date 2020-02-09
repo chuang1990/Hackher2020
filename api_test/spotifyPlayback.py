@@ -1,3 +1,10 @@
+"""
+spotifyPlayback.py
+Part of code for HackHer413
+Sents Request code to start a playlist playback on Bose SoundTouch
+Author: Catherine Huang
+Date: 02-09-2020
+"""
 import requests
 import xml.dom.minidom
 

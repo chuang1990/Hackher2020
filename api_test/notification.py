@@ -1,3 +1,11 @@
+"""
+notificationk.py
+Part of code for HackHer413
+Sents Requests to pause the playing audio, play a notification sound,
+then resume the audio.
+Author: Kunjal Panchal
+Date: 02-09-2020
+"""
 import requests
 import xml.dom.minidom
 
@@ -9,17 +17,17 @@ url = "https://freesound.org/data/previews/275/275571_4486188-hq.mp3" # enter th
 service = "That word..."
 reason = "...it does not mean..."
 message = "...what you think it means."
-print(message)
+# print(message)
 key = "0k0RQaOC1nTLHX1DbHZRXNnBpjAlZOTH" # enter your API key here
 volumeVal = "30" # enter volume here, a number between 10 and 70
 
 send = requests.get('http://' + ipaddr + ':8090/now_playing')
 responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
-print(responseXML_pretty)
+# print(responseXML_pretty)
 
 send = requests.get('http://' + ipaddr + ':8090/volume')
-print(send.text)
+# print(send.text)
 responseXML = xml.dom.minidom.parseString(send.text)
 volume_tag = responseXML.getElementsByTagName('volume')
 volumeVal = volume_tag[0].childNodes[0].firstChild.nodeValue

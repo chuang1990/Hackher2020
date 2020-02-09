@@ -1,3 +1,13 @@
+"""
+doorbell_script.py
+Part of code for HackHer413
+Sents request code to play a door bell sound; 
+split and storge the audio file that is paused during the door bell soung, 
+to allow easy playback after the pause.
+Author: Kunjal Panchal
+Date: 02-09-2020
+"""
+
 import requests         # for making http calls
 import xml.dom.minidom  # for parsing the XML data
 import math             # to adjust volume correctly
@@ -67,7 +77,7 @@ responseXML_pretty = responseXML.toprettyxml()
 print (responseXML_pretty)"""
 
 delta_time = current_timestamp - int(timestamp_from_album_tag)
-print(delta_time)
+# print(delta_time)
 
 file_name = "./whole_mp3.mp3"
 shortened_file_name = "./split_mp3.mp3"
@@ -94,6 +104,7 @@ second_half.export(shortened_file_name, format="mp3")
 time.sleep(2)
 sendXML = "<play_info><app_key>" + key + "</app_key><url>" + notification_sound_url + "</url><service>" + service + "</service><reason>" + reason + "</reason><message>" + message + "</message><volume>" + volumeVal + "</volume></play_info>"
 send = requests.post('http://' + ipaddr + ':8090/speaker', data=sendXML)
+
 
 responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()

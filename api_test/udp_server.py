@@ -1,3 +1,10 @@
+"""
+udp_server.py
+Part of code for HackHer413
+Waiting for a message from the sensor to trigger the notification script
+Author: Kunjal Panchal
+Date: 02-09-2020
+"""
 import socket
 
 UDP_IP = "192.168.1.238"
