@@ -2,6 +2,7 @@ import requests
 import xml.dom.minidom
 import math
 from bs4 import BeautifulSoup as bs
+# import pymedia
 
 # set the params:
 
@@ -16,24 +17,29 @@ volumeVal = "40" # enter volume here, a number between 10 and 70
 
 # form and send the /speaker POST request
 send = requests.get('http://' + ipaddr + ':8090/volume')
+print(send.text)
 responseXML = xml.dom.minidom.parseString(send.text)
 volume_tag = responseXML.getElementsByTagName('volume')
 #targetvolume_tag = volume_tag.getElementsByTagName('targetvolume')
 responseXML_pretty = responseXML.toprettyxml()
-print (responseXML_pretty)
-print(volume_tag[0].childNodes[0].firstChild.nodeValue)
+# print (responseXML_pretty)
+# print(volume_tag[0].childNodes[0].firstChild.nodeValue)
 volumeVal = volume_tag[0].childNodes[0].firstChild.nodeValue
+
 
 updated_volume = str(math.floor(int(volumeVal)/2))
 print(updated_volume)
 #sendXML = "<play_info><app_key>" + key + "</app_key><url>" + url + "</url><service>" + service + "</service><reason>" + reason + "</reason><message>" + message + "</message><volume>" + volumeVal + "</volume></play_info>"
 #send = requests.post('http://' + ipaddr + ':8090/speaker', data=sendXML)
 
+print("===================================")
+print("print out before pause!")
 send = requests.get('http://' + ipaddr + ':8090/now_playing')
+print(send.text)
 responseXML = bs(send.text, 'html.parser')
 # responseXML = xml.dom.minidom.parseString(send.text)
 # responseXML_pretty = responseXML.toprettyxml()
-print (responseXML.prettify())
+# print (responseXML.prettify())
 
 # send = requests.get('http://' + ipaddr + ':8090/select')
 # responseXML = xml.dom.minidom.parseString(send.text)
@@ -48,7 +54,8 @@ send = requests.post('http://' + ipaddr + ':8090/key', data=sendXML)
 responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
 print (responseXML_pretty)
-
+print("==============================")
+# print("response after pause")
 
 sendXML = "<volume>"+updated_volume+"</volume>"
 send = requests.post('http://' + ipaddr + ':8090/volume', data=sendXML)

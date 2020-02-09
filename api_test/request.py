@@ -1,46 +1,41 @@
 import requests
 import xml.dom.minidom
-from bs4 import BeautifulSoup as bs
 
-# # get list of song from playlist
-# r_playlist = "https://api.spotify.com/v1/playlists/6rqhFgbbKwnb9MLmUQDhG6/tracks"
-# get = requests.get(r_playlist)
-# soup = bs(get.text,'html.parser')
-# print(soup)
-# song_list=soup.find_all('a',{'class':'pl-video-title-link'})
-# # print(song_list)
-# song_urls = []
-# for l in song_list:
-#     song_urls.append(l.get("href"))
-# # print(song_list)
 
-# # responseXML = xml.dom.minidom.parseString(send.text)
-# # responseXML_pretty = responseXML.toprettyxml()
-# # print(responseXML_pretty)
+# set the params:
 
-play_sound = False
+ipaddr = "192.168.1.92" # enter your speaker IP address here
+send = requests.get('http://' + ipaddr + ':8090/info')
+# print(send.text)
+responseXML = xml.dom.minidom.parseString(send.text)
+responseXML_pretty = responseXML.toprettyxml()
+print (responseXML_pretty)
 
-if play_sound:
-    # for
-    ip_addr = "192.168.1.92"
-    url = "https://www.youtube.com/watch?v=LZiBVEyJl1E" # enter the URL of the file you want to play here
-    
-    # print("https://www.youtube.com" + song_urls[0])
-    # url = "https://www.youtube.com" + song_urls[0]
-    service = "That word..." 
-    reason = "...it does not mean..."
-    message = "...what you think it means."
-    key = "0k0RQaOC1nTLHX1DbHZRXNnBpjAlZOTH" # enter your API key here 
-    volumeVal = "40" # enter volume here, a number between 10 and 70
 
-    # form and send the /speaker POST request
-    sendXML = "<play_info><app_key>" + key + "</app_key><url>" + url + "</url><service>" + service + "</service><reason>" + reason + "</reason><message>" + message + "</message><volume>" + volumeVal + "</volume></play_info>"
-    
-    # sendXML = "<play_info><app_key>" + key + "</app_key><now_playing></now_playing></play_info>"
-    send = requests.post('http://' + ip_addr + ':8090/speaker', data=sendXML)
 
-    # print a pretty version of the response - not required but can be helpful for reading errors if they occur
+url = "http://www.nasa.gov/mp3/590331main_ringtone_smallStep.mp3" # enter the URL of the file you want to play here
+uri = "spotify:album:3LcYYV9ozePfgYYmXv0P3r"
+spotify_account = "animaniac1911"
+# spotify_account = "SpotifyConnectUserName"
+service = "That word..."
+reason = "...it does not mean..."
+message = "...what you think it means."
+# headers = 
+key = "0k0RQaOC1nTLHX1DbHZRXNnBpjAlZOTH" # enter your API key here
+volumeVal = "30" # enter volume here, a number between 10 and 70
 
-    responseXML = xml.dom.minidom.parseString(send.text)
-    responseXML_pretty = responseXML.toprettyxml()
-    print (responseXML_pretty)  
+# form and send the /speaker POST request
+
+# sendXML = "<play_info><app_key>" + key + "</app_key><url>" + url + "</url><service>" + url + "</service><reason>" + reason + "</reason><message>" + message + "</message><volume>" + volumeVal + "</volume></play_info>"
+# <ContentItem source="AUX" sourceAccount="AUX"></ContentItem>
+sendXML = '<ContentItem source= "SPOTIFY" location = "%s" sourceAccount = "%s"></ContentItem>' %(uri, spotify_account)
+send = requests.post('http://' + ipaddr + ':8090/select', data=sendXML, headers = {'Content-Type': 'text/xml'})
+print(sendXML)
+print(send)
+# print a pretty version of the response - not required but can be helpful for reading errors if they occur
+
+send = requests.get('http://' + ipaddr + ':8090/now_playing')
+
+responseXML = xml.dom.minidom.parseString(send.text)
+responseXML_pretty = responseXML.toprettyxml()
+print (responseXML_pretty)
