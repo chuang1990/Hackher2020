@@ -54,3 +54,10 @@ send = requests.post('http://' + ipaddr + ':8090/volume', data=sendXML)
 responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
 print (responseXML_pretty)
+
+sendXML = "<play_info><app_key>" + key + "</app_key><url>" + url + "</url><service>" + service + "</service><reason>" + reason + "</reason><message>" + message + "</message><volume>" + volumeVal + "</volume></play_info>"
+send = requests.post('http://' + ipaddr + ':8090/speaker', data=sendXML)
+
+responseXML = xml.dom.minidom.parseString(send.text)
+responseXML_pretty = responseXML.toprettyxml()
+print (responseXML_pretty)
