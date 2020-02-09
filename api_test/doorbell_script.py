@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import requests         # for making http calls
 import xml.dom.minidom  # for parsing the XML data
 import math             # to adjust volume correctly
@@ -7,6 +8,12 @@ from pydub import AudioSegment # to split the audio file due to lack of seeker f
 import urllib.request   # to convert url to uri and download the content locally
 import pathlib          # to convert uri to url
 import os               # to manipulate retalive and absolute local paths
+=======
+import requests
+import xml.dom.minidom
+import math
+from bs4 import BeautifulSoup as bs
+>>>>>>> 56c8e6b5a8c949f507fda4fac4bbb585c40042c4
 
 # set the params:
 ipaddr = "192.168.1.92" # enter your speaker IP address here
@@ -33,6 +40,7 @@ print(updated_volume)
 
 # Getting the current track info
 send = requests.get('http://' + ipaddr + ':8090/now_playing')
+<<<<<<< HEAD
 responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
 print(responseXML_pretty)
@@ -49,6 +57,17 @@ print (responseXML_pretty)
 responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
 print (responseXML_pretty)"""
+=======
+responseXML = bs(send.text, 'html.parser')
+# responseXML = xml.dom.minidom.parseString(send.text)
+# responseXML_pretty = responseXML.toprettyxml()
+print (responseXML.prettify())
+
+# send = requests.get('http://' + ipaddr + ':8090/select')
+# responseXML = xml.dom.minidom.parseString(send.text)
+# responseXML_pretty = responseXML.toprettyxml()
+# print (responseXML_pretty)
+>>>>>>> 56c8e6b5a8c949f507fda4fac4bbb585c40042c4
 
 keystate = "press"
 keyvalue = "PAUSE"
