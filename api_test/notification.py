@@ -18,9 +18,16 @@ responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
 print(responseXML_pretty)
 
+send = requests.get('http://' + ipaddr + ':8090/volume')
+print(send.text)
+responseXML = xml.dom.minidom.parseString(send.text)
+volume_tag = responseXML.getElementsByTagName('volume')
+volumeVal = volume_tag[0].childNodes[0].firstChild.nodeValue
+updated_volume = str(int(volumeVal)+20)
+
 # form and send the /speaker POST request
 
-sendXML = "<play_info><app_key>" + key + "</app_key><url>" + url + "</url><service>" + service + "</service><reason>" + reason + "</reason><message>" + message + "</message><volume>" + volumeVal + "</volume></play_info>"
+sendXML = "<play_info><app_key>" + key + "</app_key><url>" + url + "</url><service>" + service + "</service><reason>" + reason + "</reason><message>" + message + "</message><volume>" + updated_volume + "</volume></play_info>"
 send = requests.post('http://' + ipaddr + ':8090/speaker', data=sendXML)
 
 # print a pretty version of the response - not required but can be helpful for reading errors if they occur
