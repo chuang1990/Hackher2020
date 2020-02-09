@@ -22,7 +22,7 @@ Download and unzip the repository to your computer and Raspberry Pi.
 
 Make sure the Bose SoundTouch, Raspberry Pi, and Computer are all on the same wifi networks. 
 
-On your computer, start by running the upn_server.py, then runs the spotifyPlayback.py.  On the Rapberry Pi run the ultrasonic_distance.py.
+On your computer, start by running the udp_server.py, then runs the spotifyPlayback.py.  On the Rapberry Pi, run the ultrasonic_distance.py.
 
 Then move towards the sensor, within a certain distance the audio will be paused, the notification sound will be play, then music will resume.
 
