@@ -7,7 +7,7 @@ Date: 02-09-2020
 """
 import socket
 
-UDP_IP = "192.168.1.238"
+UDP_IP = "192.168.1.31"
 UDP_PORT = 5005
 
 sock = socket.socket(socket.AF_INET, # Internet
