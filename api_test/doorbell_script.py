@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import requests         # for making http calls
 import xml.dom.minidom  # for parsing the XML data
 import math             # to adjust volume correctly
@@ -8,16 +8,8 @@ from pydub import AudioSegment # to split the audio file due to lack of seeker f
 import urllib.request   # to convert url to uri and download the content locally
 import pathlib          # to convert uri to url
 import os               # to manipulate retalive and absolute local paths
-=======
-import requests
-import xml.dom.minidom
-import math
+
 from bs4 import BeautifulSoup as bs
-<<<<<<< HEAD
-# import pymedia
-=======
->>>>>>> 56c8e6b5a8c949f507fda4fac4bbb585c40042c4
->>>>>>> 52f06be027c933021ee6718160cd7b0512d7c5f9
 
 # set the params:
 ipaddr = "192.168.1.92" # enter your speaker IP address here
@@ -35,31 +27,17 @@ print(send.text)
 responseXML = xml.dom.minidom.parseString(send.text)
 volume_tag = responseXML.getElementsByTagName('volume')
 responseXML_pretty = responseXML.toprettyxml()
-<<<<<<< HEAD
-# print (responseXML_pretty)
-# print(volume_tag[0].childNodes[0].firstChild.nodeValue)
-volumeVal = volume_tag[0].childNodes[0].firstChild.nodeValue
-
-
-=======
 print(responseXML_pretty)
 print(volume_tag[0].childNodes[0].firstChild.nodeValue)
 volumeVal = volume_tag[0].childNodes[0].firstChild.nodeValue
 
-# Updating the volume
->>>>>>> 52f06be027c933021ee6718160cd7b0512d7c5f9
 updated_volume = str(math.floor(int(volumeVal)/2))
 print(updated_volume)
 
-<<<<<<< HEAD
 print("===================================")
 print("print out before pause!")
 send = requests.get('http://' + ipaddr + ':8090/now_playing')
 print(send.text)
-=======
-# Getting the current track info
-send = requests.get('http://' + ipaddr + ':8090/now_playing')
-<<<<<<< HEAD
 responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
 print(responseXML_pretty)
@@ -76,8 +54,6 @@ print (responseXML_pretty)
 responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
 print (responseXML_pretty)"""
-=======
->>>>>>> 52f06be027c933021ee6718160cd7b0512d7c5f9
 responseXML = bs(send.text, 'html.parser')
 # responseXML = xml.dom.minidom.parseString(send.text)
 # responseXML_pretty = responseXML.toprettyxml()
@@ -87,8 +63,6 @@ responseXML = bs(send.text, 'html.parser')
 # responseXML = xml.dom.minidom.parseString(send.text)
 # responseXML_pretty = responseXML.toprettyxml()
 # print (responseXML_pretty)
->>>>>>> 56c8e6b5a8c949f507fda4fac4bbb585c40042c4
-
 keystate = "press"
 keyvalue = "PAUSE"
 sendXML = "<key state=\""+ keystate + "\" sender=\"Gabbo\">"+keyvalue+"</key>"
@@ -100,10 +74,6 @@ send = requests.post('http://' + ipaddr + ':8090/key', data=sendXML)
 responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
 print (responseXML_pretty)
-<<<<<<< HEAD
-print("==============================")
-# print("response after pause")
-=======
 
 delta_time = current_timestamp - int(timestamp_from_album_tag)
 print(delta_time)
@@ -122,7 +92,6 @@ second_half = sound[delta_time*1000:]
 
 # writing mp3 files is a one liner
 second_half.export(shortened_file_name, format="mp3")
->>>>>>> 52f06be027c933021ee6718160cd7b0512d7c5f9
 
 sendXML = "<volume>"+updated_volume+"</volume>"
 send = requests.post('http://' + ipaddr + ':8090/volume', data=sendXML)
