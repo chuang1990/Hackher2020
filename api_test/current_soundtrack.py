@@ -1,6 +1,7 @@
 import requests
 import xml.dom.minidom
-
+import calendar
+import time
 
 # set the params:
 
@@ -14,13 +15,12 @@ print (responseXML_pretty)
 
 
 url = "http://www.nasa.gov/mp3/590331main_ringtone_smallStep.mp3" # enter the URL of the file you want to play here
-uri = "spotify:album:3LcYYV9ozePfgYYmXv0P3r"
-spotify_account = "animaniac1911"
-# spotify_account = "SpotifyConnectUserName"
+
+#url = "file:///F:/MS%20-%20II/Bose%20Soundtouch/Hackher2020/resources/sample_soundtrack.mp3"
 service = "That word..."
 reason = "...it does not mean..."
-message = "...what you think it means."
-# headers = 
+message = url+";"+str(calendar.timegm(time.gmtime()))+";"+"...what you think it means."
+print(message)
 key = "0k0RQaOC1nTLHX1DbHZRXNnBpjAlZOTH" # enter your API key here
 volumeVal = "30" # enter volume here, a number between 10 and 70
 
