@@ -1,6 +1,7 @@
 import requests
 import xml.dom.minidom
 import math
+from bs4 import BeautifulSoup as bs
 
 # set the params:
 
@@ -29,14 +30,15 @@ print(updated_volume)
 #send = requests.post('http://' + ipaddr + ':8090/speaker', data=sendXML)
 
 send = requests.get('http://' + ipaddr + ':8090/now_playing')
-responseXML = xml.dom.minidom.parseString(send.text)
-responseXML_pretty = responseXML.toprettyxml()
-print (responseXML_pretty)
+responseXML = bs(send.text, 'html.parser')
+# responseXML = xml.dom.minidom.parseString(send.text)
+# responseXML_pretty = responseXML.toprettyxml()
+print (responseXML.prettify())
 
-send = requests.get('http://' + ipaddr + ':8090/select')
-responseXML = xml.dom.minidom.parseString(send.text)
-responseXML_pretty = responseXML.toprettyxml()
-print (responseXML_pretty)
+# send = requests.get('http://' + ipaddr + ':8090/select')
+# responseXML = xml.dom.minidom.parseString(send.text)
+# responseXML_pretty = responseXML.toprettyxml()
+# print (responseXML_pretty)
 
 keystate = "press"
 keyvalue = "PAUSE"
