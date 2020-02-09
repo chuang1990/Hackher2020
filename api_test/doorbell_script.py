@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import requests         # for making http calls
 import xml.dom.minidom  # for parsing the XML data
 import math             # to adjust volume correctly
@@ -8,12 +7,6 @@ from pydub import AudioSegment # to split the audio file due to lack of seeker f
 import urllib.request   # to convert url to uri and download the content locally
 import pathlib          # to convert uri to url
 import os               # to manipulate retalive and absolute local paths
-=======
-import requests
-import xml.dom.minidom
-import math
-from bs4 import BeautifulSoup as bs
->>>>>>> 56c8e6b5a8c949f507fda4fac4bbb585c40042c4
 
 # set the params:
 ipaddr = "192.168.1.92" # enter your speaker IP address here
@@ -40,7 +33,6 @@ print(updated_volume)
 
 # Getting the current track info
 send = requests.get('http://' + ipaddr + ':8090/now_playing')
-<<<<<<< HEAD
 responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
 print(responseXML_pretty)
@@ -57,29 +49,24 @@ print (responseXML_pretty)
 responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
 print (responseXML_pretty)"""
-=======
-responseXML = bs(send.text, 'html.parser')
-# responseXML = xml.dom.minidom.parseString(send.text)
-# responseXML_pretty = responseXML.toprettyxml()
-print (responseXML.prettify())
 
-# send = requests.get('http://' + ipaddr + ':8090/select')
-# responseXML = xml.dom.minidom.parseString(send.text)
-# responseXML_pretty = responseXML.toprettyxml()
-# print (responseXML_pretty)
->>>>>>> 56c8e6b5a8c949f507fda4fac4bbb585c40042c4
-
-keystate = "press"
+"""keystate = "press"
 keyvalue = "PAUSE"
 sendXML = "<key state=\""+ keystate + "\" sender=\"Gabbo\">"+keyvalue+"</key>"
+"""
 
 current_timestamp = calendar.timegm(time.gmtime())
 
+"""
+send = requests.post('http://' + ipaddr + ':8090/key', data=sendXML)
+keystate = "release"
+keyvalue = "PAUSE"
+sendXML = "<key state=\""+ keystate + "\" sender=\"Gabbo\">"+keyvalue+"</key>"
 send = requests.post('http://' + ipaddr + ':8090/key', data=sendXML)
 
 responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
-print (responseXML_pretty)
+print (responseXML_pretty)"""
 
 delta_time = current_timestamp - int(timestamp_from_album_tag)
 print(delta_time)
@@ -99,13 +86,14 @@ second_half = sound[delta_time*1000:]
 # writing mp3 files is a one liner
 second_half.export(shortened_file_name, format="mp3")
 
-sendXML = "<volume>"+updated_volume+"</volume>"
-send = requests.post('http://' + ipaddr + ':8090/volume', data=sendXML)
+#sendXML = "<volume>"+updated_volume+"</volume>"
+#send = requests.post('http://' + ipaddr + ':8090/volume', data=sendXML)
 
-responseXML = xml.dom.minidom.parseString(send.text)
-responseXML_pretty = responseXML.toprettyxml()
-print (responseXML_pretty)
+#responseXML = xml.dom.minidom.parseString(send.text)
+#responseXML_pretty = responseXML.toprettyxml()
+#print (responseXML_pretty)
 
+time.sleep(2)
 sendXML = "<play_info><app_key>" + key + "</app_key><url>" + notification_sound_url + "</url><service>" + service + "</service><reason>" + reason + "</reason><message>" + message + "</message><volume>" + volumeVal + "</volume></play_info>"
 send = requests.post('http://' + ipaddr + ':8090/speaker', data=sendXML)
 
@@ -113,8 +101,23 @@ responseXML = xml.dom.minidom.parseString(send.text)
 responseXML_pretty = responseXML.toprettyxml()
 print (responseXML_pretty)
 
+"""keystate = "press"
+keyvalue = "PAUSE"
+sendXML = "<key state=\""+ keystate + "\" sender=\"Gabbo\">"+keyvalue+"</key>"
+send = requests.post('http://' + ipaddr + ':8090/key', data=sendXML)
+
+keystate = "release"
+keyvalue = "PAUSE"
+sendXML = "<key state=\""+ keystate + "\" sender=\"Gabbo\">"+keyvalue+"</key>"
+send = requests.post('http://' + ipaddr + ':8090/key', data=sendXML)
+
+responseXML = xml.dom.minidom.parseString(send.text)
+responseXML_pretty = responseXML.toprettyxml()
+print (responseXML_pretty)"""
+
 shortened_file = pathlib.Path(os.path.abspath(shortened_file_name)).as_uri()
 
+time.sleep(2)
 sendXML = "<play_info><app_key>" + key + "</app_key><url>" + shortened_file + "</url><service>" + service + "</service><reason>" + reason + "</reason><message>" + message + "</message><volume>" + volumeVal + "</volume></play_info>"
 send = requests.post('http://' + ipaddr + ':8090/speaker', data=sendXML)
 
